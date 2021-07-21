@@ -51,7 +51,7 @@ def default_access_token():
 
 @pytest.fixture(scope='function')
 def encoded_token(default_access_token):
-    return jwt.encode(default_access_token,'secret-key',algorithm='HS256').decode('utf-8')
+    return jwt.encode(default_access_token,'secret-key',algorithm='HS256')
 
 def test_verified_token(client,encoded_token,Authorize):
     class SettingsOne(BaseSettings):
