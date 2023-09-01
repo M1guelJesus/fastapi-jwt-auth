@@ -64,7 +64,7 @@ class LoadConfig(BaseModel):
             )
         return v
 
-    @validator("authjwt_denylist_token_checks")
+    @validator("authjwt_denylist_token_checks", each_item=True)
     def validate_denylist_token_checks(cls, v):
         if v not in ["access", "refresh"]:
             raise ValueError(
@@ -72,11 +72,11 @@ class LoadConfig(BaseModel):
             )
         return v
 
-    @validator("authjwt_token_location")
+    @validator("authjwt_token_location", each_item=True)
     def validate_token_location(cls, v):
-        if v not in ["headers", "cookies"]:
+        if v not in ["headers", "cookies", "body"]:
             raise ValueError(
-                "The 'authjwt_token_location' must be between 'headers' or 'cookies'"
+                "The 'authjwt_token_location' must be between 'headers' or 'cookies' 'body'"
             )
         return v
 
@@ -88,7 +88,7 @@ class LoadConfig(BaseModel):
             )
         return v
 
-    @validator("authjwt_csrf_methods")
+    @validator("authjwt_csrf_methods", each_item=True)
     def validate_csrf_methods(cls, v):
         if v.upper() not in {"GET", "HEAD", "POST", "PUT", "DELETE", "PATCH"}:
             raise ValueError(
